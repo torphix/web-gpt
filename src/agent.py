@@ -51,7 +51,7 @@ class WebAgent:
             parsed_html = self._extract_html_data()
             action = self._choose_action(parsed_html, task)
             print("Selected action: ", action)
-            action()
+            result = action()
 
     def _choose_action(
         self,
@@ -84,22 +84,23 @@ class WebAgent:
         self.driver.get(url)
 
     def _click_button(self, button_id: str):
-        pass
+        self.driver.find_element_by_id(button_id).click()
 
     def _click_link(self, link_id: str):
-        pass
+        self.driver.find_element_by_id(link_id).click()
 
     def _fill_form(self, form_id: str, data: dict):
-        pass
+        self.driver.find_element_by_id(form_id).send_keys(data)
 
     def _submit_form(self, form_id: str):
-        pass
+        self.driver.find_element_by_id(form_id).submit()
 
     def _ask_user(self, question: str):
-        pass
+        return input(question)
 
     def _write_to_file(self, file_path: str, data: str):
-        pass
+        with open(file_path, "w") as f:
+            f.write(data)
 
     def _extract_html_data(
         self,
